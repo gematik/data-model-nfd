@@ -1,0 +1,34 @@
+buildscript {
+    dependencies {
+        classpath "de.gematik:gematik-parent-plugin:1.1.3"
+        classpath "de.gematik:documentation-plugin:1.1.2"
+    }
+}
+
+
+apply plugin: "de.gematik.parent"
+apply plugin: "de.gematik.publish"
+
+description = """DataModel-NFD"""
+group = 'de.gematik.ti'
+
+dependencies {
+    // Use JUnit test framework
+    testImplementation 'junit:junit:4.12'
+}
+
+gematikPublish {
+    name = "Data Model NFD Java"
+    description = "The NFD (Notfalldaten) data model schema and xml deserialization."
+    gitHubProjectName = "data-model-nfd"
+}
+
+task sourceJar(type: Jar) {
+    archiveClassifier.set("sources")
+    from "${project.buildDir}/../src/main/java/"
+    include "**/*.java"
+}
+
+artifacts {
+    archives sourceJar
+}
