@@ -29,6 +29,13 @@ task sourceJar(type: Jar) {
     include "**/*.java"
 }
 
+task javadocJar(type: Jar) {
+    archiveClassifier.set("javadoc")
+    from "${project.buildDir}/docs/javadoc/"
+    into "${project.name}"
+}
+
 artifacts {
     archives sourceJar
+    archives javadocJar
 }
